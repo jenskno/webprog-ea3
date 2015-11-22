@@ -45,6 +45,7 @@ function addobject(){
     document.getElementById('sa').value= '';
     document.getElementById('st').value= '';
     document.getElementById('zeigeAnzahl').value= '';
+    document.getElementById('zut').value= '';
 
 }
 function show(){
@@ -57,7 +58,11 @@ function show(){
 function showlist(e){
     var cursor = e.target.result;
     if(cursor){
-        databox.innerHTML += '<div>' + cursor.value.rezeptname + ' - ' + cursor.value.rezeptname + ' - ' + cursor.value.speiseart + '</div>';
+        databox.innerHTML +=    '<div>' + cursor.value.rezeptname +
+                                ' - '   + cursor.value.autorname  +
+                                ' - '   + cursor.value.speiseart  +
+                                ' - '   + cursor.value.speisetyp  +
+                                ' - '   + cursor.value.zutaten  +'</div>';
         cursor.continue();
     }
 }
