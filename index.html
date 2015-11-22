@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Aufgabe Rezepteerfassung</title>
+    <link rel="stylesheet" href="css/aufgabeRezepte.css" type="text/css" />
+    <script type="text/javascript">
+        function checkInput(rf){
+            var fehler = "";
+            var speiseart = false;
+            var speisetyp = false;
+
+            // prüfe auf Vorgaben Rezeptname
+            if(rf.elements["rezeptname"] != ""){
+                if (rf.elements["rezeptname"].value.length > 4){
+                }else{
+                    fehler += "\nRezeptname zu kurz";
+                }
+            }else{
+                fehler += "\nRezeptname darf nicht leer sein!";
+            }
+            // prüfe auf Vorgaben Autor
+            if(rf.elements["autorname"] != ""){
+            }else{
+                fehler += "\nAngabe Autor darf nicht leer sein!";
+            }
+            // prüfe auf Vorgaben Speiseart/Speisetyp
+            if(rf.elements["speiseart"].value == "Vorspeise" ||
+                    rf.elements["speiseart"].value == "Hauptspeise" ||
+                    rf.elements["speiseart"].value == "Dessert"){
+                speiseart = true;
+            }else{
+                fehler += "\nUnbekannte Speiseart!";
+            }
+
+
+            if(rf.elements["speisetyp"].value == "suess" ||
+                    rf.elements["speisetyp"].value == "suesssauer" ||
+                    rf.elements["speisetyp"].value == "herzhaft" ||
+                    rf.elements["speisetyp"].value == "geschmacklos"){
+                speisetyp = true;
+            }else{
+                fehler += "\nUnbekannter Speisetyp!";
+            }
+
+
+            if(speisetyp == false || speiseart == false){
+                fehler += "\nBitte mindestens ein Speiseart bzw. Speisetyp angeben!";
+            }
+            // prüfe auf Angaben Zutaten
+            if(rf.elements["zutat"].value < 1 || rf.elements["zutataltern"].value < 1 ){
+                fehler += "\nDas Rezept sollte mindestens eine Zutat enthalten!";
+            }
+
+            if (fehler == ""){
+                if (writeToFile(rf)){
+                    return true;
+                }else{
+                    alert("Daten konnten nicht geschrieben werden");
+                    return false;
+                }
+            } else {
+                alert("Folgende(r) Fehler trat(en) auf!\n" + fehler);
+                return false;
+            }
+        }
+
+        function writeToFile(rf){
+            alert
+            return false;
+        }
+    </script>
+</head>
+<body>
+<header><h1>Rezepteerfassung</h1></header>
+<section>
+    <form id="rezeptform" action="index.html" method="post" onsubmit="return checkInput(this);">
+        <p>
+            <input id="rezeptname" name="rezeptname" type="text" value="" maxlength="250" pattern="[A-z]{5,}" required>
+            <label for="rezeptname">Rezeptname</label>
+        </p>
+        <p>
+            <input id="autorname" name="autorname" type="text" value="" maxlength="250" pattern="[A-z]{5,}" required>
+            <label for="autorname">Autor</label>
+        </p>
+            <input id="sa" name="speiseart" type="text" pattern="Vorspeise|Hauptspeise|Dessert" required>
+            <span class="hint">(Wähle aus: Vorspeise, Hauptspeise oder Dessert)</span>
+            <label for="sa">Speiseart </label>
+        </p>
+        <p>
+            <input id="st" name="speisetyp" type="radio" value="suess"> süß
+            <input id="st" name="speisetyp" type="radio" value="suesssauer"> süß-sauer
+            <input id="st" name="speisetyp" type="radio" value="herzhaft"> herzhaft
+            <input id="st" name="speisetyp" type="radio" value="geschmacklos"> geschmacklos
+            <label for="st">Speisetyp</label>
+        </p>
+        <p>
+            <input id="zeigeAnzahl" type="text" value="1">
+            <input id="zt" name="zutat" type="range" min="1" max="50" step="1" value ="1" onchange="javascript:document.getElementById('zeigeAnzahl').value = document.getElementById('zt').value;" />
+            <span class="hint">(Wähle max. 50)</span>
+            <label for="zt">Anzahl der Zutaten</label>
+        </p>
+        <p>
+            <input id="zut" name="zutataltern" type="number" name="quantity" min="1" max="50" value="1">
+            <span class="hint">(Wähle max. 50)</span>
+            <label for="zut">Anzahl der Zutaten</label>
+        </p>
+        <p>
+            <input type="reset">
+            <input type="submit">
+        </p>
+    </form>
+</section>
+<footer>Jens Knobloch - FH Lübeck - Modul Webprogrammierung</footer>
+</body>
+</html>
