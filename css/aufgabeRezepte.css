@@ -16,6 +16,14 @@ input {
     font-size: 0.8em;
 }
 
+#databox{
+    float: right;
+    width: 400px;
+    margin-right: 20px;
+    padding: 20px;
+    border: 1px solid #999999;
+}
+
 /* Angaben für das Formular */
 
 /* Browser Reset */
